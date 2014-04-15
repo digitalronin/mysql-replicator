@@ -30,8 +30,6 @@ module MysqlSlaveReplicator
         MasterChanger.new(
           :master_host          => params.fetch(:master_host),
           :mysql_root_password  => mysql_root_password,
-          :file                 => status[:file],
-          :position             => status[:position],
           :replication_user     => params.fetch(:replication_user),
           :replication_password => params.fetch(:replication_password)
         )
