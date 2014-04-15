@@ -17,12 +17,22 @@ module MysqlSlaveReplicator
     end
 
     def setup!
-      master_status = MysqlMasterStatus(master_host).new.status
+      master_status = MasterStatus.new(
+        :master_host         => master_host,
+        :mysql_root_password => mysql_root_password
+      ).status
       copy_data
       change_master(master_status)
     end
 
     private
 
+    def copy_data
+      DbCopier.new(
+        :master_host         => master_host,
+        :mysql_root_password => mysql_root_password,
+        :database            => database
+      ).run
+    end
   end
 end

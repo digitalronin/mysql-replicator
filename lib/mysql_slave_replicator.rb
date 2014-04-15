@@ -1,2 +1,6 @@
-require 'mysql_slave_replicator/setup'
-require 'mysql_slave_replicator/mysql_master_status'
+require 'lib/logger'
+require 'lib/executor'
+require 'lib/mysql_command'
+require 'lib/mysql_slave_replicator/setup'
+require 'lib/mysql_slave_replicator/master_status'
+require 'lib/mysql_slave_replicator/db_copier'
