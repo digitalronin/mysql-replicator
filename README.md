@@ -19,6 +19,7 @@ CAVEATS
 
 TODO
 
+* add a "no copying" mode that only updates master log file and position
 * write some tests
 * tidy up the code with some DI
 * require replication user and password as parameters
