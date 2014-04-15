@@ -25,7 +25,7 @@ module MysqlSlaveReplicator
 
     private
 
-    def change_master
+    def change_master(status)
       %[CHANGE MASTER TO MASTER_LOG_FILE='#{status[:file]}', MASTER_LOG_POS=#{status[:position]}, MASTER_HOST='#{master_host}', MASTER_USER='#{replication_user}', MASTER_PASSWORD='#{replication_password}']
     end
   end
