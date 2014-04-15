@@ -12,6 +12,7 @@ module MysqlSlaveReplicator
     end
 
     def run
+      execute mysql_command("stop slave", mysql_root_password)
       cmd = mysqldump(master_host, database, mysql_root_password)
       dump_cmd = ssh_command(cmd, master_host)
       load_cmd = ['mysql', mysql_credentials('root', mysql_root_password), database].join(' ')
