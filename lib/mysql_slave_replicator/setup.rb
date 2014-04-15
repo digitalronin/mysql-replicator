@@ -17,15 +17,30 @@ module MysqlSlaveReplicator
     end
 
     def setup!
-      master_status = MasterStatus.new(
-        :master_host         => master_host,
-        :mysql_root_password => mysql_root_password
-      ).status
+      master_status = get_master_status
       copy_data
       change_master(master_status)
     end
 
     private
+
+    def change_master(status)
+      MasterChanger.new(
+        :master_host          => master_host,
+        :mysql_root_password  => mysql_root_password,
+        :file                 => status[:file],
+        :position             => status[:position],
+        :replication_user     => replication_user,
+        :replication_password => replication_password
+      ).change!
+    end
+
+    def get_master_status
+      MasterStatus.new(
+        :master_host         => master_host,
+        :mysql_root_password => mysql_root_password
+      ).status
+    end
 
     def copy_data
       DbCopier.new(

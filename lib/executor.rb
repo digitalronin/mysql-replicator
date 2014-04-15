@@ -8,6 +8,6 @@ module Executor
   def execute(cmd)
     string = cmd.is_a?(Array) ? cmd.join('; ') : cmd
     log "CMD: #{string}"
-    #  `#{string}`
+    `#{string}`
   end
 end

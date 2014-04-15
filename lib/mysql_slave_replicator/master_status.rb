@@ -12,11 +12,11 @@ module MysqlSlaveReplicator
     end
 
     def status
-      # TODO
-      return {:file=>"mysql-bin.000001", :position=>"5386477"}
       cmd = mysql_command("show master status\\G", mysql_root_password)
       data = execute ssh_command(cmd, master_host)
-      parse data
+      rtn = parse data
+      log "MASTER STATUS - file: #{rtn[:file]}, position: #{rtn[:position]}"
+      rtn
     end
 
     private
