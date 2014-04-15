@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'lib/mysql_slave_replicator'
+
+replicator = MysqlSlaveReplicator::Setup.new(
+  :master_host          => '',
+  :mysql_root_password  => '',
+  :database             => 'mydb',
+  :replication_user     => '',
+  :replication_password => ''
+)
+
+replicator.setup!
+
