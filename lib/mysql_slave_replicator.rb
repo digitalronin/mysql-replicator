@@ -1,7 +1,0 @@
-require 'lib/mysql_slave_replicator/logger'
-require 'lib/mysql_slave_replicator/executor'
-require 'lib/mysql_slave_replicator/mysql_command'
-require 'lib/mysql_slave_replicator/setup'
-require 'lib/mysql_slave_replicator/master_status'
-require 'lib/mysql_slave_replicator/db_copier'
-require 'lib/mysql_slave_replicator/master_changer'

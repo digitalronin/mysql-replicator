@@ -1,4 +1,4 @@
-module MysqlSlaveReplicator
+module MysqlSlaver
   module MysqlCommand
     def mysql_credentials(user, password)
       rtn = "-u #{user} "

@@ -4,7 +4,7 @@
 # This assumes that the current user can issue ssh commands to the master
 # server (to get its master status, and to dump and load data over the ssh
 # connection)
-module MysqlSlaveReplicator
+module MysqlSlaver
   class Setup
     attr_reader :status_fetcher, :data_copier, :master_changer
 

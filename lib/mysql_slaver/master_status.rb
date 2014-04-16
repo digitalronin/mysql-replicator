@@ -1,4 +1,4 @@
-module MysqlSlaveReplicator
+module MysqlSlaver
   class MasterStatus
     include Executor
     include Logger

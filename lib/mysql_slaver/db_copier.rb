@@ -1,4 +1,4 @@
-module MysqlSlaveReplicator
+module MysqlSlaver
   class DbCopier
     include Executor
     include MysqlCommand

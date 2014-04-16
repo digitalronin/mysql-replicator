@@ -1,4 +1,4 @@
-module MysqlSlaveReplicator
+module MysqlSlaver
   module Executor
     include Logger
 

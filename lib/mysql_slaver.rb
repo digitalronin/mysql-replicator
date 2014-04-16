@@ -1,0 +1,7 @@
+require 'lib/mysql_slaver/logger'
+require 'lib/mysql_slaver/executor'
+require 'lib/mysql_slaver/mysql_command'
+require 'lib/mysql_slaver/setup'
+require 'lib/mysql_slaver/master_status'
+require 'lib/mysql_slaver/db_copier'
+require 'lib/mysql_slaver/master_changer'
