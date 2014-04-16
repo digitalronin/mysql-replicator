@@ -1,4 +1,3 @@
-
 Tool to setup a mysql replication slave by copying data and master status from a remote mysql master over ssh.
 
 USAGE
@@ -7,7 +6,7 @@ USAGE
 
     mysql_slaver enslave --database=DATABASE --master-host=MASTER_HOST --replication-password=REPLICATION_PASSWORD --replication-user=REPLICATION_USER
 
-HOMEPAGE
+BLOGPOST
 
   http://digitalronin.github.io/2014/04/16/mysql-slaver-gem-setup-mysql-replication/
 
