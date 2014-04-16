@@ -1,5 +1,5 @@
 module MysqlSlaver
-  module Executor
+  class Executor
     include Logger
 
     def ssh_command(cmd, host)

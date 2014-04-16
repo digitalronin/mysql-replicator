@@ -1,16 +1,15 @@
 module MysqlSlaver
   class MasterChanger
-    include Executor
-    include Logger
     include MysqlCommand
 
-    attr_accessor :master_host, :mysql_root_password, :replication_user, :replication_password
+    attr_accessor :master_host, :mysql_root_password, :replication_user, :replication_password, :executor
 
     def initialize(params)
       @master_host          = params.fetch(:master_host)
       @mysql_root_password  = params.fetch(:mysql_root_password, '')
       @replication_user     = params.fetch(:replication_user)
       @replication_password = params.fetch(:replication_password)
+      @executor             = params.fetch(:executor) { Executor.new }
     end
 
     def change!(status)
@@ -20,7 +19,7 @@ module MysqlSlaver
         'start slave'
       ]
       cmd = mysql_command(cmds.join('; '), mysql_root_password)
-      execute cmd
+      executor.execute cmd
     end
 
     private

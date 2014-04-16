@@ -5,14 +5,14 @@
 # server (to get its master status, and to dump and load data over the ssh
 # connection)
 module MysqlSlaver
-  class Setup
+  class Slaver
     attr_reader :status_fetcher, :data_copier, :master_changer
 
     def initialize(params)
       mysql_root_password  = params.fetch(:mysql_root_password, '')
 
       @status_fetcher = params.fetch(:status_fetcher) {
-        MasterStatus.new(
+        StatusFetcher.new(
           :master_host         => params.fetch(:master_host),
           :mysql_root_password => mysql_root_password
         )
@@ -36,7 +36,7 @@ module MysqlSlaver
       }
     end
 
-    def setup!
+    def enslave!
       master_status = status_fetcher.status
       data_copier.run
       master_changer.change!(master_status)
