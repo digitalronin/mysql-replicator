@@ -16,11 +16,11 @@ ASSUMPTIONS/PRE-REQUISITES
 * the current localhost user can ssh to the db master
 * your mysql administrator user is called 'root', locally and on the db master
 * root user has the same password on this host and the master server
-* mysql is on the local user''s path
-* mysql and mysqldump are on the remote ssh user''s path
+* mysql is on the local user's path
+* mysql and mysqldump are on the remote ssh user's path
 * replication permissions from the local host to the db master are already setup
 * mysql is running on the default port (3306)
-* ssh is on the current user''s path
+* ssh is on the current user's path
 * db character set is UTF-8
 * any ssh config settings for the host are set in a ~/.ssh/config file
 
@@ -30,10 +30,8 @@ CAVEATS
 
 TODO
 
-* accept (and insist on) command-line parameters
 * add a "no copying" mode that only updates master log file and position
 * add a "dry-run" mode
-* package as a gem
 * check ssh connection and permissions
 * check replication permissions
 * check slave is setup as a replication slave (i.e. it has a mysql server id)
