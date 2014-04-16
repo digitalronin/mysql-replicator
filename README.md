@@ -7,6 +7,10 @@ USAGE
 
     mysql_slaver enslave --database=DATABASE --master-host=MASTER_HOST --replication-password=REPLICATION_PASSWORD --replication-user=REPLICATION_USER
 
+HOMEPAGE
+
+  http://digitalronin.github.io/2014/04/16/mysql-slaver-gem-setup-mysql-replication/
+
 ASSUMPTIONS/PRE-REQUISITES
 
 * localhost is configured as a mysql replication slave

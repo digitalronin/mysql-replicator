@@ -7,6 +7,7 @@ group :development, :test do
   gem "rdoc-data"
   gem "rake"
   gem "gem-this"
+  gem "gemcutter"
   gem "rspec"
   gem "ruby-debug"
 end

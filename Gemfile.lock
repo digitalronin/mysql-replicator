@@ -4,6 +4,7 @@ GEM
     columnize (0.3.6)
     diff-lcs (1.2.5)
     gem-this (0.3.7)
+    gemcutter (0.7.1)
     json (1.8.1)
     linecache (0.46)
       rbx-require-relative (> 0.0.4)
@@ -33,6 +34,7 @@ PLATFORMS
 
 DEPENDENCIES
   gem-this
+  gemcutter
   rake
   rdoc
   rdoc-data
