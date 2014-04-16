@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
     "lib/mysql_slaver/status_fetcher.rb",
     "lib/mysql_slaver.rb"
   ]
-  s.homepage         = "http://digitalronin.github.io/2014/04/16/mysql-slaver-gem-setup-mysql-replication/"
+  s.homepage         = "https://github.com/digitalronin/mysql-slaver"
   s.rdoc_options     = ["--main", "README.md"]
   s.require_paths    = ["lib"]
   s.rubygems_version = "1.8.25"
