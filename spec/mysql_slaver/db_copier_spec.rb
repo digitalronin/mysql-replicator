@@ -14,9 +14,9 @@ module MysqlSlaver
     }
     subject(:copier) { described_class.new(params) }
 
-    describe "#run" do
+    describe "#copy!" do
       it "stops slave" do
-        copier.run
+        copier.copy!
         stop = %[mysql -u root -p supersekrit  -e "stop slave"]
         expect(executor).to have_received(:execute).with(stop)
       end
@@ -24,14 +24,14 @@ module MysqlSlaver
       it "loads data" do
         dump_and_load = "dummy-ssh-command | mysql -u root -p supersekrit  myappdb"
         expect(executor).to receive(:execute).once.ordered.with(dump_and_load)
-        copier.run
+        copier.copy!
       end
 
       context "dumping" do
         it "issues mysqldump over ssh" do
           dump = "mysqldump -h my.db.host -u root -p supersekrit  --master-data --single-transaction --quick --skip-add-locks --skip-lock-tables --default-character-set=utf8 --compress myappdb"
           expect(executor).to receive(:ssh_command).with(dump, 'my.db.host')
-          copier.run
+          copier.copy!
         end
       end
     end

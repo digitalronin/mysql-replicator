@@ -11,7 +11,7 @@ module MysqlSlaver
       @executor            = params.fetch(:executor) { Executor.new }
     end
 
-    def run
+    def copy!
       executor.execute mysql_command("stop slave", mysql_root_password)
       cmd = mysqldump(master_host, database, mysql_root_password)
       dump_cmd = executor.ssh_command(cmd, master_host)

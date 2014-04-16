@@ -6,7 +6,7 @@ module MysqlSlaver
 
     describe "#enslave!" do
       let(:status_fetcher) { double(StatusFetcher, :status  => ())   }
-      let(:data_copier)    { double(DbCopier, :run          => true) }
+      let(:data_copier)    { double(DbCopier, :copy!        => true) }
       let(:master_changer) { double(MasterChanger, :change! => true) }
 
       let(:params) {
@@ -24,7 +24,7 @@ module MysqlSlaver
 
       it "copies data" do
         slaver.enslave!
-        expect(data_copier).to have_received(:run)
+        expect(data_copier).to have_received(:copy!)
       end
 
       it "changes master status" do

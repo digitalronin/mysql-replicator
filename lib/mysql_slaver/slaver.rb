@@ -38,7 +38,7 @@ module MysqlSlaver
 
     def enslave!
       master_status = status_fetcher.status
-      data_copier.run
+      data_copier.copy!
       master_changer.change!(master_status)
     end
   end
