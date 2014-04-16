@@ -3,6 +3,8 @@ Tool to setup a mysql replication slave by copying data and master status from a
 
 USAGE
 
+    mysql_slaver help enslave
+
     mysql_slaver enslave --database=DATABASE --master-host=MASTER_HOST --replication-password=REPLICATION_PASSWORD --replication-user=REPLICATION_USER
 
 ASSUMPTIONS/PRE-REQUISITES
