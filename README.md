@@ -1,10 +1,16 @@
+
 Tool to setup a mysql replication slave by copying data and master status from a remote mysql master over ssh.
+
+USAGE
+
+    mysql_slaver enslave --database=DATABASE --master-host=MASTER_HOST --replication-password=REPLICATION_PASSWORD --replication-user=REPLICATION_USER
 
 ASSUMPTIONS/PRE-REQUISITES
 
 * localhost is configured as a mysql replication slave
 * the current localhost user can ssh to the db master
 * your mysql administrator user is called 'root', locally and on the db master
+* root user has the same password on this host and the master server
 * mysql is on the local user''s path
 * mysql and mysqldump are on the remote ssh user''s path
 * replication permissions from the local host to the db master are already setup
@@ -25,6 +31,8 @@ TODO
 * package as a gem
 * check ssh connection and permissions
 * check replication permissions
+* check slave is setup as a replication slave (i.e. it has a mysql server id)
 * allow overriding the mysql port
+* allow overriding the mysql root user
+* allow different root user passwords on slave and master
 * allow ssh options
-* make it work under ruby 2
