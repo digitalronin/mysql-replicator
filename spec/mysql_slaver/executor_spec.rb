@@ -6,7 +6,7 @@ module MysqlSlaver
 
     describe "#ssh_command" do
       it "formats command" do
-        expect(executor.ssh_command("foo", "myhost")).to eq("ssh -p 64389 myhost 'foo'")
+        expect(executor.ssh_command("foo", "myhost")).to eq("ssh myhost 'foo'")
       end
     end
   end

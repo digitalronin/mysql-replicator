@@ -3,7 +3,7 @@ module MysqlSlaver
     include Logger
 
     def ssh_command(cmd, host)
-      "ssh -p 64389 #{host} '#{cmd}'"
+      "ssh #{host} '#{cmd}'"
     end
 
     def execute(cmd)
