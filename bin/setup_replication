@@ -3,7 +3,7 @@
 require 'pp'
 require 'lib/mysql_slaver'
 
-replicator = MysqlSlaver::Slaver.new(
+slaver = MysqlSlaver::Slaver.new(
   :master_host          => '23.253.34.92',
   :mysql_root_password  => '',
   :database             => 'amoda_yml_production',
@@ -11,5 +11,5 @@ replicator = MysqlSlaver::Slaver.new(
   :replication_password => 'weoivixjeksjes'
 )
 
-replicator.enslave!
+slaver.enslave!
 
