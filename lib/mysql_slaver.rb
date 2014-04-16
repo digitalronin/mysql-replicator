@@ -1,7 +1,14 @@
-require 'lib/mysql_slaver/logger'
-require 'lib/mysql_slaver/executor'
-require 'lib/mysql_slaver/mysql_command'
-require 'lib/mysql_slaver/slaver'
-require 'lib/mysql_slaver/status_fetcher'
-require 'lib/mysql_slaver/db_copier'
-require 'lib/mysql_slaver/master_changer'
+require 'rubygems'
+require 'thor'
+
+libdir = File.join(File.dirname(__FILE__), 'mysql_slaver')
+
+require "#{libdir}/logger"
+require "#{libdir}/logger"
+require "#{libdir}/executor"
+require "#{libdir}/mysql_command"
+require "#{libdir}/slaver"
+require "#{libdir}/status_fetcher"
+require "#{libdir}/db_copier"
+require "#{libdir}/master_changer"
+require "#{libdir}/cli"
