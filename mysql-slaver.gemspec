@@ -2,12 +2,12 @@
 
 Gem::Specification.new do |s|
   s.name = "mysql-slaver"
-  s.version = "0.1.7"
+  s.version = "0.1.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
 
   s.authors          = ["David Salgado"]
-  s.date             = "2014-04-16"
+  s.date             = "2014-04-17"
   s.email            = "david@digitalronin.com"
   s.executables      = ["mysql_slaver"]
   s.extra_rdoc_files = ["README.md"]
