@@ -32,13 +32,23 @@ EOF
       end
         
       it "executes show master command over ssh" do
-        show_master = %[mysql -u root -p supersekrit  -e "show master status\\G"]
+        show_master = %[mysql  -u root -p supersekrit -e "show master status\\G"]
         fetcher.status
         expect(executor).to have_received(:ssh_command).with(show_master, 'my.db.host')
       end
 
       it "parses show master output" do
         expect(fetcher.status).to eq({:file => 'mysql-bin.003219', :position => '37065270'})
+      end
+    end
+
+    context "using a socket filename" do
+      let(:params) { super().merge(:socket_file => "/var/run/mysqld/mysqld.master.sock") }
+
+      it "executes show master command over ssh" do
+        show_master = %[mysql -S /var/run/mysqld/mysqld.master.sock -u root -p supersekrit -e "show master status\\G"]
+        fetcher.status
+        expect(executor).to have_received(:ssh_command).with(show_master, 'my.db.host')
       end
     end
   end

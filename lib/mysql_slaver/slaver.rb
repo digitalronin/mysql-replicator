@@ -9,13 +9,15 @@ module MysqlSlaver
     attr_reader :status_fetcher, :data_copier, :master_changer
 
     def initialize(params)
-      mysql_root_password  = params.fetch(:mysql_root_password, '')
-      port                 = params.fetch(:port, 3306)
+      mysql_root_password = params.fetch(:mysql_root_password, '')
+      port                = params.fetch(:port, 3306)
+      socket_file         = params.fetch(:socket_file, nil)
 
       @status_fetcher = params.fetch(:status_fetcher) {
         StatusFetcher.new(
           :master_host         => params.fetch(:master_host),
-          :mysql_root_password => mysql_root_password
+          :mysql_root_password => mysql_root_password,
+          :socket_file         => socket_file
         )
       }
 
@@ -24,7 +26,8 @@ module MysqlSlaver
           :master_host         => params.fetch(:master_host),
           :mysql_root_password => mysql_root_password,
           :database            => params.fetch(:database),
-          :port                => port
+          :port                => port,
+          :socket_file         => socket_file
         )
       }
 
@@ -34,7 +37,8 @@ module MysqlSlaver
           :mysql_root_password  => mysql_root_password,
           :replication_user     => params.fetch(:replication_user),
           :replication_password => params.fetch(:replication_password),
-          :port                 => port
+          :port                 => port,
+          :socket_file          => socket_file
         )
       }
     end

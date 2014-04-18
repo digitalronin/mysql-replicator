@@ -75,6 +75,26 @@ module MysqlSlaver
           expect(changer.port).to eq(3307)
         end
       end
+
+      context "with mysql socket" do
+        let(:params) { super().merge(:socket_file => "/tmp/mysql.sock") }
+
+        it "instantiates a status fetcher" do
+          fetcher = slaver.status_fetcher
+          expect(fetcher.socket_file).to eq("/tmp/mysql.sock")
+        end
+
+        it "instantiates a master changer" do
+          changer = slaver.master_changer
+          expect(changer.socket_file).to eq("/tmp/mysql.sock")
+        end
+
+        it "instantiates a data copier" do
+          copier = slaver.data_copier
+          expect(copier.socket_file).to eq("/tmp/mysql.sock")
+        end
+
+      end
     end
   end
 end

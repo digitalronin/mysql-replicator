@@ -3,16 +3,18 @@ module MysqlSlaver
     include Logger
     include MysqlCommand
 
-    attr_accessor :master_host, :mysql_root_password, :executor
+    attr_accessor :master_host, :mysql_root_password, :executor, :socket_file
 
     def initialize(params)
-      @master_host          = params.fetch(:master_host)
-      @mysql_root_password  = params.fetch(:mysql_root_password, '')
-      @executor             = params.fetch(:executor) { Executor.new }
+      @master_host         = params.fetch(:master_host)
+      @socket_file         = params.fetch(:socket_file, nil)
+      @mysql_root_password = params.fetch(:mysql_root_password, '')
+      @executor            = params.fetch(:executor) { Executor.new }
     end
 
     def status
-      cmd = mysql_command("show master status\\G", mysql_root_password)
+      params = {:root_password => mysql_root_password, :socket_file => socket_file}
+      cmd = mysql_command("show master status\\G", params)
       data = executor.execute executor.ssh_command(cmd, master_host)
       rtn = parse data
       log "MASTER STATUS - file: #{rtn[:file]}, position: #{rtn[:position]}"

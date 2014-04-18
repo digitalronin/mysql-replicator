@@ -19,7 +19,7 @@ module MysqlSlaver
 
     describe "#change!" do
       it "executes multi-part mysql command" do
-        change_cmd = %[mysql -u root -p supersekrit  -e "stop slave; CHANGE MASTER TO MASTER_LOG_FILE='mysql-bin.001555', MASTER_LOG_POS=18426246, MASTER_HOST='my.db.host', MASTER_PORT=3306, MASTER_USER='repluser', MASTER_PASSWORD='replpassword'; start slave"]
+        change_cmd = %[mysql  -u root -p supersekrit -e "stop slave; CHANGE MASTER TO MASTER_LOG_FILE='mysql-bin.001555', MASTER_LOG_POS=18426246, MASTER_HOST='my.db.host', MASTER_PORT=3306, MASTER_USER='repluser', MASTER_PASSWORD='replpassword'; start slave"]
         changer.change!(status)
         expect(executor).to have_received(:execute).with(change_cmd)
       end
@@ -29,7 +29,17 @@ module MysqlSlaver
       let(:params) { super().merge(:port => 3307) }
 
       it "executes multi-part mysql command" do
-        change_cmd = %[mysql -u root -p supersekrit  -e "stop slave; CHANGE MASTER TO MASTER_LOG_FILE='mysql-bin.001555', MASTER_LOG_POS=18426246, MASTER_HOST='my.db.host', MASTER_PORT=3307, MASTER_USER='repluser', MASTER_PASSWORD='replpassword'; start slave"]
+        change_cmd = %[mysql  -u root -p supersekrit -e "stop slave; CHANGE MASTER TO MASTER_LOG_FILE='mysql-bin.001555', MASTER_LOG_POS=18426246, MASTER_HOST='my.db.host', MASTER_PORT=3307, MASTER_USER='repluser', MASTER_PASSWORD='replpassword'; start slave"]
+        changer.change!(status)
+        expect(executor).to have_received(:execute).with(change_cmd)
+      end
+    end
+
+    context "with a mysql socket file" do
+      let(:params) { super().merge(:socket_file => "/tmp/mysql.sock") }
+
+      it "executes multi-part mysql command" do
+        change_cmd = %[mysql -S /tmp/mysql.sock -u root -p supersekrit -e "stop slave; CHANGE MASTER TO MASTER_LOG_FILE='mysql-bin.001555', MASTER_LOG_POS=18426246, MASTER_HOST='my.db.host', MASTER_PORT=3306, MASTER_USER='repluser', MASTER_PASSWORD='replpassword'; start slave"]
         changer.change!(status)
         expect(executor).to have_received(:execute).with(change_cmd)
       end
