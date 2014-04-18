@@ -19,7 +19,6 @@ ASSUMPTIONS/PRE-REQUISITES
 * mysql is on the local user's path
 * mysql and mysqldump are on the remote ssh user's path
 * replication permissions from the local host to the db master are already setup
-* mysql is running on the default port (3306)
 * ssh is on the current user's path
 * db character set is UTF-8
 * any ssh config settings for the host are set in a ~/.ssh/config file
@@ -30,12 +29,12 @@ CAVEATS
 
 TODO
 
+* allow passing in a mysql socket filename
 * add a "no copying" mode that only updates master log file and position
 * add a "dry-run" mode
 * check ssh connection and permissions
 * check replication permissions
 * check slave is setup as a replication slave (i.e. it has a mysql server id)
-* allow overriding the mysql port
 * allow overriding the mysql root user
 * allow different root user passwords on slave and master
 * allow ssh options

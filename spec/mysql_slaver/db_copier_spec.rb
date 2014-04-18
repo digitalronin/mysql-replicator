@@ -35,5 +35,15 @@ module MysqlSlaver
         end
       end
     end
+
+    context "with a non-standard mysql port" do
+      let(:params) { super().merge(:port => 3307) }
+
+      it "issues mysqldump over ssh" do
+        dump = "mysqldump -h my.db.host -P 3307 -u root -p supersekrit  --master-data --single-transaction --quick --skip-add-locks --skip-lock-tables --default-character-set=utf8 --compress myappdb"
+        expect(executor).to receive(:ssh_command).with(dump, 'my.db.host')
+        copier.copy!
+      end
+    end
   end
 end

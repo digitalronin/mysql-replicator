@@ -64,6 +64,16 @@ module MysqlSlaver
         expect(changer.mysql_root_password).to eq('supersekrit')
         expect(changer.replication_user).to eq('repluser')
         expect(changer.replication_password).to eq('replpassword')
+        expect(changer.port).to eq(3306)
+      end
+
+      context "with non-standard mysql port" do
+        let(:params) { super().merge(:port => 3307) }
+
+        it "instantiates a master changer" do
+          changer = slaver.master_changer
+          expect(changer.port).to eq(3307)
+        end
       end
     end
   end

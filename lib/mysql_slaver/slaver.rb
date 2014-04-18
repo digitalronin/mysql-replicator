@@ -10,6 +10,7 @@ module MysqlSlaver
 
     def initialize(params)
       mysql_root_password  = params.fetch(:mysql_root_password, '')
+      port                 = params.fetch(:port, 3306)
 
       @status_fetcher = params.fetch(:status_fetcher) {
         StatusFetcher.new(
@@ -22,7 +23,8 @@ module MysqlSlaver
         DbCopier.new(
           :master_host         => params.fetch(:master_host),
           :mysql_root_password => mysql_root_password,
-          :database            => params.fetch(:database)
+          :database            => params.fetch(:database),
+          :port                => port
         )
       }
 
@@ -31,7 +33,8 @@ module MysqlSlaver
           :master_host          => params.fetch(:master_host),
           :mysql_root_password  => mysql_root_password,
           :replication_user     => params.fetch(:replication_user),
-          :replication_password => params.fetch(:replication_password)
+          :replication_password => params.fetch(:replication_password),
+          :port                 => port
         )
       }
     end

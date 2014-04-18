@@ -4,10 +4,12 @@ module MysqlSlaver
     option :database,              :required => true, :desc => "The database to copy from the master"
     option :replication_user,      :required => true, :desc => "DB user (on the master host), with replication permissions"
     option :replication_password,  :required => true, :desc => "DB password for the replication user"
-    option :root_password,         :desc     => "Password for the mysql root user (on both master and slave)"
+
+    option :root_password,         :desc => "Password for the mysql root user (on both master and slave)"
+    option :port,                  :desc => "Mysql port (if not 3306)"
+
     desc "enslave", "start mysql replication to this host from a master"
-    long_desc <<-LONGDESC
-    LONGDESC
+
     def enslave
       MysqlSlaver::Slaver.new(
           :master_host          => options[:master_host],
