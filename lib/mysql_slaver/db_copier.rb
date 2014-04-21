@@ -10,7 +10,7 @@ module MysqlSlaver
       @database            = params.fetch(:database)
       @port                = params.fetch(:port, nil)
       @socket_file         = params.fetch(:socket_file, nil)
-      @executor            = params.fetch(:executor) { Executor.new }
+      @executor            = params.fetch(:executor) { Executor.new(:ssh_port => params[:ssh_port]) }
     end
 
     def copy!

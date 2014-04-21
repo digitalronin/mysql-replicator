@@ -9,7 +9,7 @@ module MysqlSlaver
       @master_host         = params.fetch(:master_host)
       @socket_file         = params.fetch(:socket_file, nil)
       @mysql_root_password = params.fetch(:mysql_root_password, '')
-      @executor            = params.fetch(:executor) { Executor.new }
+      @executor            = params.fetch(:executor) { Executor.new(:ssh_port => params[:ssh_port]) }
     end
 
     def status

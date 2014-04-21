@@ -11,13 +11,15 @@ module MysqlSlaver
     def initialize(params)
       mysql_root_password = params.fetch(:mysql_root_password, '')
       port                = params.fetch(:port, 3306)
+      ssh_port            = params.fetch(:ssh_port, 22)
       socket_file         = params.fetch(:socket_file, nil)
 
       @status_fetcher = params.fetch(:status_fetcher) {
         StatusFetcher.new(
           :master_host         => params.fetch(:master_host),
           :mysql_root_password => mysql_root_password,
-          :socket_file         => socket_file
+          :socket_file         => socket_file,
+          :ssh_port            => ssh_port
         )
       }
 
@@ -27,7 +29,8 @@ module MysqlSlaver
           :mysql_root_password => mysql_root_password,
           :database            => params.fetch(:database),
           :port                => port,
-          :socket_file         => socket_file
+          :socket_file         => socket_file,
+          :ssh_port            => ssh_port
         )
       }
 

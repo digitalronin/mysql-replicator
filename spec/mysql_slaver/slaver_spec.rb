@@ -76,6 +76,20 @@ module MysqlSlaver
         end
       end
 
+      context "with non-standard ssh port" do
+        let(:params) { super().merge(:ssh_port => 64389) }
+
+        it "instantiates a status fetcher" do
+          fetcher = slaver.status_fetcher
+          expect(fetcher.executor.ssh_port).to eq(64389)
+        end
+
+        it "instantiates a data copier" do
+          copier = slaver.data_copier
+          expect(copier.executor.ssh_port).to eq(64389)
+        end
+      end
+
       context "with mysql socket" do
         let(:params) { super().merge(:socket_file => "/tmp/mysql.sock") }
 
@@ -93,7 +107,6 @@ module MysqlSlaver
           copier = slaver.data_copier
           expect(copier.socket_file).to eq("/tmp/mysql.sock")
         end
-
       end
     end
   end
