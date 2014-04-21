@@ -10,6 +10,7 @@ module MysqlSlaver
     option :port,                  :desc => "Mysql port (if not 3306)"
     option :ssh_port,              :desc => "SSH port (if not 22)"
     option :sock,                  :desc => "Mysql socket file (if any)"
+    option :no_copy,               :type => :boolean, :desc => "Do not copy data - just change master status"
 
     def enslave
       MysqlSlaver::Slaver.new(
@@ -17,6 +18,7 @@ module MysqlSlaver
           :port                 => options[:port],
           :ssh_port             => options[:ssh_port],
           :socket_file          => options[:sock],
+          :no_copy              => options[:no_copy],
           :mysql_root_password  => options[:root_password],
           :database             => options[:database],
           :replication_user     => options[:replication_user],

@@ -32,6 +32,24 @@ module MysqlSlaver
         expect(master_changer).to have_received(:change!)
       end
 
+      context "no-copy" do
+        let(:params) { super().merge(:no_copy => true) }
+
+        it "fetches master status" do
+          slaver.enslave!
+          expect(status_fetcher).to have_received(:status)
+        end
+
+        it "doesn't copy data" do
+          slaver.enslave!
+          expect(data_copier).to_not have_received(:copy!)
+        end
+
+        it "changes master status" do
+          slaver.enslave!
+          expect(master_changer).to have_received(:change!)
+        end
+      end
     end
 
     context "instantiating collaborators" do

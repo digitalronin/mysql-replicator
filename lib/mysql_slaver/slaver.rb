@@ -6,13 +6,14 @@
 # connection)
 module MysqlSlaver
   class Slaver
-    attr_reader :status_fetcher, :data_copier, :master_changer
+    attr_reader :status_fetcher, :data_copier, :master_changer, :no_copy
 
     def initialize(params)
       mysql_root_password = params.fetch(:mysql_root_password, '')
       port                = params.fetch(:port, 3306)
       ssh_port            = params.fetch(:ssh_port, 22)
       socket_file         = params.fetch(:socket_file, nil)
+      @no_copy            = params.fetch(:no_copy, false)
 
       @status_fetcher = params.fetch(:status_fetcher) {
         StatusFetcher.new(
@@ -48,7 +49,7 @@ module MysqlSlaver
 
     def enslave!
       master_status = status_fetcher.status
-      data_copier.copy!
+      data_copier.copy! unless no_copy
       master_changer.change!(master_status)
     end
   end

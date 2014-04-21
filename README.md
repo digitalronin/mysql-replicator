@@ -31,7 +31,6 @@ CAVEATS
 TODO
 
 * output better help (include optional params, format better (shorter lines))
-* add a "no copying" mode that only updates master log file and position
 * add a "dry-run" mode
 * check ssh connection
 * check replication permissions
