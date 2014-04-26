@@ -1,5 +1,9 @@
 Tool to setup a mysql replication slave by copying data and master status from a remote mysql master over ssh.
 
+[![Gem Version](https://badge.fury.io/rb/mysql-slaver.svg)](http://badge.fury.io/rb/mysql-slaver)
+[![Build Status](https://travis-ci.org/digitalronin/mysql-slaver.svg?branch=master)](https://travis-ci.org/digitalronin/mysql-slaver)
+[![Dependency Status](https://gemnasium.com/digitalronin/mysql-slaver.svg)](https://gemnasium.com/digitalronin/mysql-slaver)
+
 USAGE
 
     mysql_slaver help enslave
