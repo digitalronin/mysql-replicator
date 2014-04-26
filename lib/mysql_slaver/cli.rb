@@ -7,8 +7,8 @@ module MysqlSlaver
     option :replication_user,      :required => true, :desc => "DB user (on the master host), with replication permissions"
     option :replication_password,  :required => true, :desc => "DB password for the replication user"
     option :root_password,         :desc => "Password for the mysql root user (on both master and slave)"
-    option :port,                  :desc => "Mysql port (if not 3306)"
-    option :ssh_port,              :desc => "SSH port (if not 22)"
+    option :port,                  :default => 3306, :desc => "Mysql port"
+    option :ssh_port,              :default => 22,   :desc => "SSH port"
     option :sock,                  :desc => "Mysql socket file (if any)"
     option :no_copy,               :type => :boolean, :desc => "Do not copy data - just change master status"
 
