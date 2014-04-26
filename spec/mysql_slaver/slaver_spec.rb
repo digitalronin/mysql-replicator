@@ -17,6 +17,26 @@ module MysqlSlaver
         }
       }
 
+      before do
+        slaver.stub(:log => nil)
+      end
+
+      context "when status_fetcher fails" do
+        before do
+          status_fetcher.stub(:status) { raise Exception.new("fail!") }
+        end
+
+        it "does not try to copy data" do
+          slaver.enslave!
+          expect(data_copier).to_not have_received(:copy!)
+        end
+
+        it "does not try to change master status" do
+          slaver.enslave!
+          expect(master_changer).to_not have_received(:change!)
+        end
+      end
+
       it "fetches master status" do
         slaver.enslave!
         expect(status_fetcher).to have_received(:status)

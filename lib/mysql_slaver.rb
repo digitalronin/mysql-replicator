@@ -3,6 +3,7 @@ require 'thor'
 
 libdir = File.join(File.dirname(__FILE__), 'mysql_slaver')
 
+require "#{libdir}/exception"
 require "#{libdir}/logger"
 require "#{libdir}/logger"
 require "#{libdir}/executor"

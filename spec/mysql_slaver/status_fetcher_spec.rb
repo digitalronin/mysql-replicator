@@ -18,27 +18,42 @@ module MysqlSlaver
     end
 
     describe "#status" do
-      let(:output) { <<EOF
+      context "when ssh connection fails" do
+        before do
+          executor.stub(:execute => nil)
+        end
+
+        it "raises an error" do
+          expect {
+            fetcher.status
+          }.to raise_error(MysqlSlaver::Exception)
+        end
+      end
+
+      context "when ssh connection is valid" do
+
+        let(:output) { <<EOF
 *************************** 1. row ***************************
             File: mysql-bin.003219
         Position: 37065270
     Binlog_Do_DB:
 Binlog_Ignore_DB:
 EOF
-      }
+        }
 
-      before do
-        executor.stub(:execute => output)
-      end
-        
-      it "executes show master command over ssh" do
-        show_master = %[mysql  -u root -p supersekrit -e "show master status\\G"]
-        fetcher.status
-        expect(executor).to have_received(:ssh_command).with(show_master, 'my.db.host')
-      end
+        before do
+          executor.stub(:execute => output)
+        end
 
-      it "parses show master output" do
-        expect(fetcher.status).to eq({:file => 'mysql-bin.003219', :position => '37065270'})
+        it "executes show master command over ssh" do
+          show_master = %[mysql  -u root -p supersekrit -e "show master status\\G"]
+          fetcher.status
+          expect(executor).to have_received(:ssh_command).with(show_master, 'my.db.host')
+        end
+
+        it "parses show master output" do
+          expect(fetcher.status).to eq({:file => 'mysql-bin.003219', :position => '37065270'})
+        end
       end
     end
 

@@ -19,7 +19,8 @@ module MysqlSlaver
     def execute(cmd)
       string = cmd.is_a?(Array) ? cmd.join('; ') : cmd
       log "CMD: #{string}"
-      `#{string}`
+      result = `#{string}`
+      $?.success? ? result : nil
     end
   end
 end

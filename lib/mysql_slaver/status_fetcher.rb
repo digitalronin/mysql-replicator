@@ -15,10 +15,13 @@ module MysqlSlaver
     def status
       params = {:root_password => mysql_root_password, :socket_file => socket_file}
       cmd = mysql_command("show master status\\G", params)
-      data = executor.execute executor.ssh_command(cmd, master_host)
-      rtn = parse data
-      log "MASTER STATUS - file: #{rtn[:file]}, position: #{rtn[:position]}"
-      rtn
+      if data = executor.execute(executor.ssh_command(cmd, master_host))
+        rtn = parse data
+        log "MASTER STATUS - file: #{rtn[:file]}, position: #{rtn[:position]}"
+        rtn
+      else
+        raise Exception.new("Failed to get master status")
+      end
     end
 
     private

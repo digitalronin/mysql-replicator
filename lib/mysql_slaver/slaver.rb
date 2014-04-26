@@ -6,6 +6,8 @@
 # connection)
 module MysqlSlaver
   class Slaver
+    include Logger
+
     attr_reader :status_fetcher, :data_copier, :master_changer, :no_copy
 
     def initialize(params)
@@ -51,6 +53,8 @@ module MysqlSlaver
       master_status = status_fetcher.status
       data_copier.copy! unless no_copy
       master_changer.change!(master_status)
+    rescue Exception => e
+      log e.message
     end
   end
 end
