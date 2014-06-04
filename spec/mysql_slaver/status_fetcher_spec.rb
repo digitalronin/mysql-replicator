@@ -14,13 +14,13 @@ module MysqlSlaver
     subject(:fetcher) { described_class.new(params) }
 
     before do
-      fetcher.stub(:log)
+      allow(fetcher).to receive(:log)
     end
 
     describe "#status" do
       context "when ssh connection fails" do
         before do
-          executor.stub(:execute => nil)
+          allow(executor).to receive(:execute)
         end
 
         it "raises an error" do
@@ -42,7 +42,7 @@ EOF
         }
 
         before do
-          executor.stub(:execute => output)
+          allow(executor).to receive(:execute).and_return(output)
         end
 
         it "executes show master command over ssh" do

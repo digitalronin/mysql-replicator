@@ -18,12 +18,12 @@ module MysqlSlaver
       }
 
       before do
-        slaver.stub(:log => nil)
+        allow(slaver).to receive(:log)
       end
 
       context "when status_fetcher fails" do
         before do
-          status_fetcher.stub(:status) { raise Exception.new("fail!") }
+          allow(status_fetcher).to receive(:status) { raise Exception.new("fail!") }
         end
 
         it "does not try to copy data" do
